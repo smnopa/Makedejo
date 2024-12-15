@@ -1,0 +1,38 @@
+---
+export interface Props {
+  id: string;
+  nombre: string;
+  detalles: string;
+  img: string;
+  categoria: string;
+}
+
+const { id, nombre, detalles, img, categoria } = Astro.props;
+---
+
+<article class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-80 m-4 max-h-full">
+  <header class="flex flex-col w-full">
+    <!-- Imagen -->
+    <img src={img} alt={nombre} class="max-w-80 h-48 object-cover rounded-t-2xl" />
+    
+    <!-- Contenido -->
+    <div class="p-4 text-center">
+      <!-- Título -->
+      <strong class="text-[#0A3A4E] text-xl font-semibold mb-2">{nombre}</strong>
+      
+      <!-- Descripción -->
+      <span class="text-base text-gray-600 mt-2 line-clamp-3">
+        {detalles}
+      </span>
+
+      <!-- Botón -->
+      <div class="flex justify-center mt-4">
+        <a href={`/${categoria}/${id}`} target="_blank" rel="noopener noreferrer">
+          <button class="bg-[#0A3A4E] text-white px-4 py-1 text-base rounded-full w-32 hover:bg-sky-950">
+            Más detalles
+          </button>
+        </a>
+      </div>
+    </div>
+  </header>
+</article>

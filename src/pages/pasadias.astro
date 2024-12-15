@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ItemCard from "../components/ItemCard.astro";
+import { pasadias } from '../data/pasadias';
+---
+<Layout isHomePage={false} title="Pasadias | Makedejo">
+    <h1>pasadias</h1>
+
+    {pasadias.map((pasadia) => (
+    <ItemCard
+      id={pasadia.id}
+      nombre={pasadia.nombre}
+      detalles={pasadia.detalles}
+      img={pasadia.img}
+      categoria="pasadias"
+    />
+))}
+</Layout>

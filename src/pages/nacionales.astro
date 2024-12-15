@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ItemCard from "../components/ItemCard.astro";
+import { nacionales } from '../data/nacionales';
+---
+
+<Layout isHomePage={false} title="Nacionales | Makedejo">
+    <h1>nacionales</h1>
+
+    {nacionales.map((nacional) => (
+    <ItemCard
+      id={nacional.id}
+      nombre={nacional.nombre}
+      detalles={nacional.detalles}
+      img={nacional.img}
+      categoria="nacionales"
+    />
+))}
+</Layout>

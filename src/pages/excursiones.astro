@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ItemCard from "../components/ItemCard.astro";
+import { excursiones } from '../data/excursiones';
+---
+
+<Layout isHomePage={false} title="Excursiones | Makedejo">
+    <h1>excursiones</h1>
+
+{excursiones.map((excursion) => (
+    <ItemCard
+      id={excursion.id}
+      nombre={excursion.nombre}
+      detalles={excursion.detalles}
+      img={excursion.img}
+      categoria="excursiones"
+    />
+))}
+</Layout>
