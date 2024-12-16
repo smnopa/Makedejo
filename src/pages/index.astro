@@ -75,93 +75,95 @@ import ItemCartIndex from '../components/ItemCartIndex.astro';
 	<Footer />
 </Layout>
 <script>
-  const carousel = document.getElementById('carousel');
-  const nextButton = document.getElementById('next');
-  const prevButton = document.getElementById('prev');
-
-  let scrollAmount = 0;
-  const cardWidth = 320; // Ancho de la carta + margen entre cartas
-
-  let startX = 0;
-  let isDragging = false;
-
-  // Función para actualizar el estado de los botones (deshabilitar si es necesario)
-  function updateButtons() {
-    const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
-
-    // Deshabilitar el botón "next" si llegamos al final
-    if (scrollAmount >= maxScroll) {
-      nextButton?.setAttribute('disabled', 'true');
-    } else {
-      nextButton?.removeAttribute('disabled');
-    }
-
-    // Deshabilitar el botón "prev" si estamos al inicio
-    if (scrollAmount <= 0) {
-      prevButton?.setAttribute('disabled', 'true');
-    } else {
-      prevButton?.removeAttribute('disabled');
-    }
-  }
-
-  // Llamamos a la función para actualizar los botones al cargar la página
-  updateButtons();
-
-  nextButton?.addEventListener('click', () => {
-    const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
-    
-    // Solo desplazar si no estamos en el límite derecho
-    if (scrollAmount < maxScroll) {
-      scrollAmount += cardWidth;
-      carousel?.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-      updateButtons(); // Actualizar los botones después de desplazarse
-    }
-  });
-
-  prevButton?.addEventListener('click', () => {
-    // Solo desplazar si no estamos en el límite izquierdo
-    if (scrollAmount > 0) {
-      scrollAmount -= cardWidth;
-      carousel?.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-      updateButtons(); // Actualizar los botones después de desplazarse
-    }
-  });
-
-  // Manejo de movimiento táctil
-  carousel?.addEventListener('touchstart', (e) => {
-    // Guardar la posición inicial del toque
-    startX = e.touches[0].clientX;
-    isDragging = true;
-  });
-
-  carousel?.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-
-    const moveX = e.touches[0].clientX;
-    const diff = startX - moveX;
-
-    // Mover el carrusel en función del movimiento táctil
-    carousel?.scrollBy({
-      left: diff,
-      behavior: 'smooth'
-    });
-
-    startX = moveX; // Actualizar la posición de inicio
-  });
-
-  carousel?.addEventListener('touchend', () => {
-    isDragging = false;
-
-    // Después de soltar, actualizamos el estado de los botones
-    updateButtons();
-  });
-</script>
+	const carousel = document.getElementById('carousel');
+	const nextButton = document.getElementById('next');
+	const prevButton = document.getElementById('prev');
+  
+	let scrollAmount = 0;
+	const cardWidth = 320; // Ancho de la carta + margen entre cartas
+	const scrollSpeed = 3; // Factor de velocidad de desplazamiento táctil (ajusta este valor para hacerlo más largo)
+  
+	let startX = 0;
+	let isDragging = false;
+  
+	// Función para actualizar el estado de los botones (deshabilitar si es necesario)
+	function updateButtons() {
+	  const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+  
+	  // Deshabilitar el botón "next" si llegamos al final
+	  if (scrollAmount >= maxScroll) {
+		nextButton?.setAttribute('disabled', 'true');
+	  } else {
+		nextButton?.removeAttribute('disabled');
+	  }
+  
+	  // Deshabilitar el botón "prev" si estamos al inicio
+	  if (scrollAmount <= 0) {
+		prevButton?.setAttribute('disabled', 'true');
+	  } else {
+		prevButton?.removeAttribute('disabled');
+	  }
+	}
+  
+	// Llamamos a la función para actualizar los botones al cargar la página
+	updateButtons();
+  
+	nextButton?.addEventListener('click', () => {
+	  const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+	  
+	  // Solo desplazar si no estamos en el límite derecho
+	  if (scrollAmount < maxScroll) {
+		scrollAmount += cardWidth;
+		carousel?.scrollTo({
+		  left: scrollAmount,
+		  behavior: 'smooth'
+		});
+		updateButtons(); // Actualizar los botones después de desplazarse
+	  }
+	});
+  
+	prevButton?.addEventListener('click', () => {
+	  // Solo desplazar si no estamos en el límite izquierdo
+	  if (scrollAmount > 0) {
+		scrollAmount -= cardWidth;
+		carousel?.scrollTo({
+		  left: scrollAmount,
+		  behavior: 'smooth'
+		});
+		updateButtons(); // Actualizar los botones después de desplazarse
+	  }
+	});
+  
+	// Manejo de movimiento táctil
+	carousel?.addEventListener('touchstart', (e) => {
+	  // Guardar la posición inicial del toque
+	  startX = e.touches[0].clientX;
+	  isDragging = true;
+	});
+  
+	carousel?.addEventListener('touchmove', (e) => {
+	  if (!isDragging) return;
+  
+	  const moveX = e.touches[0].clientX;
+	  const diff = startX - moveX;
+  
+	  // Multiplicar la diferencia por un factor para alargar el movimiento
+	  carousel?.scrollBy({
+		left: diff * scrollSpeed,
+		behavior: 'smooth'
+	  });
+  
+	  startX = moveX; // Actualizar la posición de inicio
+	});
+  
+	carousel?.addEventListener('touchend', () => {
+	  isDragging = false;
+  
+	  // Después de soltar, actualizamos el estado de los botones
+	  updateButtons();
+	});
+  </script>
+  
 
 
 
