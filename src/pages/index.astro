@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 import ItemCartIndex from '../components/ItemCartIndex.astro';
+import Coments from '../components/Coments.astro';
 
 ---
 
@@ -53,7 +54,7 @@ import ItemCartIndex from '../components/ItemCartIndex.astro';
 	
 	 <!--Carrousel de Cartas-->
 
-<section class="flex flex-col lg:flex-row justify-center items-center">
+<section class="flex flex-col lg:flex-row justify-center items-center mb-9">
 	<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E] text-center lg:text-left mb-6 lg:mb-0 lg:mr-8">
 	  ¿A dónde<br>quieres viajar?
 	</h1>
@@ -87,6 +88,17 @@ import ItemCartIndex from '../components/ItemCartIndex.astro';
 	  </button>
 	</div>
   </section>
+
+  <section class="py-16 px-8">
+	<div class="mb-8">
+		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E]">
+			Viajámos con Make!!
+		</h1>
+	</div>
+	<div class="max-w-fit xl mx-auto text-lg text-gray-500 leading-relaxed 2xl:px-44 flex flex-wrap gap-5">
+		<Coments /><Coments /><Coments />
+	</div>
+</section>
 	
 	<Footer />
 </Layout>
