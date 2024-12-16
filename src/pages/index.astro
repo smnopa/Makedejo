@@ -18,7 +18,6 @@ import ItemCartIndex from '../components/ItemCartIndex.astro';
 		<!-- Video para pantallas grandes (horizontal) -->
 		<video muted autoplay loop playsinline class="hidden md:block object-cover w-full h-full">
 		  <source src="/img/videos/videoHomePagePc.mp4" type="video/mp4">
-		  Tu navegador no soporta el video.
 		</video>
   
 		<!-- Texto superpuesto -->
@@ -36,7 +35,134 @@ import ItemCartIndex from '../components/ItemCartIndex.astro';
 	  </div>
 	</section>
 	<TitleDescription />
-	<ItemCartIndex />
+	 <!--Carrousel de Cartas-->
+
+<section class="flex flex-col lg:flex-row justify-center items-center">
+	<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E] text-center lg:text-left mb-6 lg:mb-0 lg:mr-8">
+	  ¿A dónde<br>quieres viajar?
+	</h1>
+	<div class="relative w-full max-w-4xl mx-8">
+	  
+	  <!-- Botón para ir a la izquierda -->
+	  <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-3 rounded-r-lg shadow-lg text-gray-800 text-2xl">
+		&#10094;
+	  </button>
+	  
+	  <!-- Contenedor de las cartas -->
+	  <div id="carousel" class="flex overflow-hidden scroll-smooth space-x-4 w-full">
+		<!-- Aquí van las cartas ItemCartIndex -->
+		<div class="flex-shrink-0 w-80">
+		  <ItemCartIndex />
+		</div>
+		<div class="flex-shrink-0 w-80">
+		  <ItemCartIndex />
+		</div>
+		<div class="flex-shrink-0 w-80">
+		  <ItemCartIndex />
+		</div>
+		<div class="flex-shrink-0 w-80">
+		  <ItemCartIndex />
+		</div>
+	  </div>
+  
+	  <!-- Botón para ir a la derecha -->
+	  <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-lg text-gray-800 text-2xl">
+		&#10095;
+	  </button>
+	</div>
+  </section>
+	
 	<Footer />
 </Layout>
+<script>
+  const carousel = document.getElementById('carousel');
+  const nextButton = document.getElementById('next');
+  const prevButton = document.getElementById('prev');
+
+  let scrollAmount = 0;
+  const cardWidth = 320; // Ancho de la carta + margen entre cartas
+
+  let startX = 0;
+  let isDragging = false;
+
+  // Función para actualizar el estado de los botones (deshabilitar si es necesario)
+  function updateButtons() {
+    const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+
+    // Deshabilitar el botón "next" si llegamos al final
+    if (scrollAmount >= maxScroll) {
+      nextButton?.setAttribute('disabled', 'true');
+    } else {
+      nextButton?.removeAttribute('disabled');
+    }
+
+    // Deshabilitar el botón "prev" si estamos al inicio
+    if (scrollAmount <= 0) {
+      prevButton?.setAttribute('disabled', 'true');
+    } else {
+      prevButton?.removeAttribute('disabled');
+    }
+  }
+
+  // Llamamos a la función para actualizar los botones al cargar la página
+  updateButtons();
+
+  nextButton?.addEventListener('click', () => {
+    const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+    
+    // Solo desplazar si no estamos en el límite derecho
+    if (scrollAmount < maxScroll) {
+      scrollAmount += cardWidth;
+      carousel?.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+      updateButtons(); // Actualizar los botones después de desplazarse
+    }
+  });
+
+  prevButton?.addEventListener('click', () => {
+    // Solo desplazar si no estamos en el límite izquierdo
+    if (scrollAmount > 0) {
+      scrollAmount -= cardWidth;
+      carousel?.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+      updateButtons(); // Actualizar los botones después de desplazarse
+    }
+  });
+
+  // Manejo de movimiento táctil
+  carousel?.addEventListener('touchstart', (e) => {
+    // Guardar la posición inicial del toque
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  });
+
+  carousel?.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+
+    const moveX = e.touches[0].clientX;
+    const diff = startX - moveX;
+
+    // Mover el carrusel en función del movimiento táctil
+    carousel?.scrollBy({
+      left: diff,
+      behavior: 'smooth'
+    });
+
+    startX = moveX; // Actualizar la posición de inicio
+  });
+
+  carousel?.addEventListener('touchend', () => {
+    isDragging = false;
+
+    // Después de soltar, actualizamos el estado de los botones
+    updateButtons();
+  });
+</script>
+
+
+
   
