@@ -54,7 +54,7 @@ import Coments from '../components/Coments.astro';
 	
 	 <!--Carrousel de Cartas-->
 
-<section class="flex flex-col lg:flex-row justify-center items-center mb-9 carousel-container">
+<section class="flex flex-col lg:flex-row justify-center items-center mb-9 carousel-container" data-card-width="320">
 	<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E] text-center lg:text-left mb-6 lg:mb-0 lg:mr-8">
 	  ¿A dónde<br>quieres viajar?
 	</h1>
@@ -89,7 +89,8 @@ import Coments from '../components/Coments.astro';
 	</div>
   </section>
 
-  <section class="relative w-full max-w-6xl mx-auto py-10 bg-[#0A3A4E] carousel-container">
+  <!-- Seccion de descuentos -->
+  <section class="relative w-full max-w-6xl mx-auto py-10 bg-[#0A3A4E] carousel-container" data-card-width="640">
 	<h2 class="text-white text-4xl font-bold text-center mb-8">
 	  ¡Descuentos Especiales!
 	</h2>
@@ -151,19 +152,20 @@ import Coments from '../components/Coments.astro';
 </Layout>
 <script>
 	// Selecciona todos los contenedores de carrusel
-	  document.querySelectorAll('.carousel-container').forEach(container => {
+	document.querySelectorAll('.carousel-container').forEach(container => {
 	  const carousel = container.querySelector('.carousel');
 	  const nextButton = container.querySelector('.next');
 	  const prevButton = container.querySelector('.prev');
 	  
-	  let scrollAmount = 0;
-	  const cardWidth = 320; // Ajusta según el ancho de las tarjetas o secciones
-	  const swipeThreshold = cardWidth * 0.25; // Umbral de deslizamiento (25% del ancho de la carta)
+	  // Obtener el ancho de desplazamiento desde un atributo 'data'
+	  const cardWidth = parseInt(container.getAttribute('data-card-width') || '320'); 
+	  const swipeThreshold = cardWidth * 0.25; // Umbral de deslizamiento (25% del ancho)
 	  
+	  let scrollAmount = 0;
 	  let startX = 0;
 	  let isDragging = false;
-	  
-	  // Función para actualizar el estado de los botones (deshabilitar si es necesario)
+  
+	  // Función para actualizar el estado de los botones
 	  function updateButtons() {
 		const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
 		
@@ -211,38 +213,40 @@ import Coments from '../components/Coments.astro';
 		}
 	  });
 	  
-	  // Manejo de movimiento táctil
-	  carousel?.addEventListener('touchstart', (e: any) => {
-  		startX = e.touches[0].clientX;
-  		isDragging = true;
-});
-
+  	  // Manejo de movimiento táctil
+	carousel?.addEventListener('touchstart', (e: any) => {
+		startX = e.touches[0].clientX;
+		isDragging = true;
+  });
+  
 	carousel?.addEventListener('touchmove', (e: any) => {
-  	if (!isDragging) return;
-
-  const moveX = e.touches[0].clientX;
-  const diff = startX - moveX;
-
-  if (Math.abs(diff) >= swipeThreshold) {
-    if (diff > 0) {
-      scrollAmount += cardWidth;
-    } else {
-      scrollAmount -= cardWidth;
-    }
-
-    carousel?.scrollTo({
-      left: scrollAmount,
-      behavior: 'smooth'
-    });
-    startX = moveX;
-    updateButtons();
-  }
-});	  
-	carousel?.addEventListener('touchend', () => {
+		if (!isDragging) return;
+  
+	const moveX = e.touches[0].clientX;
+	const diff = startX - moveX;
+  
+	if (Math.abs(diff) >= swipeThreshold) {
+	  if (diff > 0) {
+		scrollAmount += cardWidth;
+	  } else {
+		scrollAmount -= cardWidth;
+	  }
+  
+	  carousel?.scrollTo({
+		left: scrollAmount,
+		behavior: 'smooth'
+	  });
+	  startX = moveX;
+	  updateButtons();
+	}
+  });
+	  carousel?.addEventListener('touchend', () => {
 		isDragging = false;
 	  });
 	});
   </script>
+  
+
   
   
 
