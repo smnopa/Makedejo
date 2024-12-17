@@ -54,19 +54,19 @@ import Coments from '../components/Coments.astro';
 	
 	 <!--Carrousel de Cartas-->
 
-<section class="flex flex-col lg:flex-row justify-center items-center mb-9">
+<section class="flex flex-col lg:flex-row justify-center items-center mb-9 carousel-container">
 	<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E] text-center lg:text-left mb-6 lg:mb-0 lg:mr-8">
 	  ¿A dónde<br>quieres viajar?
 	</h1>
 	<div class="relative w-full max-w-4xl mx-8">
 	  
 	  <!-- Botón para ir a la izquierda -->
-	  <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-3 rounded-r-lg shadow-lg text-gray-800 text-2xl">
+	  <button class="prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-3 rounded-r-lg shadow-lg text-gray-800 text-2xl">
 		&#10094;
 	  </button>
 	  
 	  <!-- Contenedor de las cartas -->
-	  <div id="carousel" class="flex overflow-hidden scroll-smooth space-x-4 w-full">
+	  <div class="carousel flex overflow-hidden scroll-smooth space-x-4 w-full">
 		<!-- Aquí van las cartas ItemCartIndex -->
 		<div class="flex-shrink-0 w-80">
 		  <ItemCartIndex />
@@ -83,12 +83,59 @@ import Coments from '../components/Coments.astro';
 	  </div>
   
 	  <!-- Botón para ir a la derecha -->
-	  <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-lg text-gray-800 text-2xl">
+	  <button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-lg text-gray-800 text-2xl">
 		&#10095;
 	  </button>
 	</div>
   </section>
 
+  <section class="relative w-full max-w-6xl mx-auto py-10 bg-[#0A3A4E] carousel-container">
+	<h2 class="text-white text-4xl font-bold text-center mb-8">
+	  ¡Descuentos Especiales!
+	</h2>
+  
+	<!-- Botón para ir a la izquierda -->
+	<button class="prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-3 rounded-r-lg shadow-lg text-gray-800 text-2xl">
+	  &#10094;
+	</button>
+  
+	<!-- Contenedor del carrusel de descuentos -->
+	<div class="flex overflow-hidden scroll-smooth space-x-4 w-full carousel">
+	  <!-- Sección de descuento 1 -->
+	  <div class="w-full flex-shrink-0 bg-white rounded-lg shadow-lg">
+		<img src="img/images/imgfooter.webp" alt="Descuento 1" class="w-full h-64 object-cover rounded-t-lg">
+		<div class="p-4 text-center">
+		  <h3 class="text-xl font-bold text-[#0A3A4E]">¡Descuento del 20%!</h3>
+		  <p class="text-lg">En pasadías solo por hoy</p>
+		</div>
+	  </div>
+  
+	  <!-- Sección de descuento 2 -->
+	  <div class="w-full flex-shrink-0 bg-white rounded-lg shadow-lg">
+		<img src="img/images/imgfooter.webp" alt="Descuento 2" class="w-full h-64 object-cover rounded-t-lg">
+		<div class="p-4 text-center">
+		  <h3 class="text-xl font-bold text-[#0A3A4E]">¡Descuento del 30%!</h3>
+		  <p class="text-lg">En hoteles y resorts</p>
+		</div>
+	  </div>
+  
+	  <!-- Sección de descuento 3 -->
+	  <div class="w-full flex-shrink-0 bg-white rounded-lg shadow-lg">
+		<img src="img/images/imgfooter.webp" alt="Descuento 3" class="w-full h-64 object-cover rounded-t-lg">
+		<div class="p-4 text-center">
+		  <h3 class="text-xl font-bold text-[#0A3A4E]">¡Descuento del 50%!</h3>
+		  <p class="text-lg">En tours por la ciudad</p>
+		</div>
+	  </div>
+	</div>
+  
+	<!-- Botón para ir a la derecha -->
+	<button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-lg text-gray-800 text-2xl">
+	  &#10095;
+	</button>
+  </section>
+  
+  <!-- seccion de comentarios -->
   <section class="py-16 px-8">
 	<div class="mb-20 text-center">
 		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E]">
@@ -103,100 +150,97 @@ import Coments from '../components/Coments.astro';
 	<Footer />
 </Layout>
 <script>
-	const carousel = document.getElementById('carousel');
-	const nextButton = document.getElementById('next');
-	const prevButton = document.getElementById('prev');
-  
-	let scrollAmount = 0;
-	const cardWidth = 320; // Ancho de la carta + margen entre cartas
-	const swipeThreshold = cardWidth * 0.25; // Umbral de deslizamiento (25% del ancho de la carta)
-  
-	let startX = 0;
-	let isDragging = false;
-  
-	// Función para actualizar el estado de los botones (deshabilitar si es necesario)
-	function updateButtons() {
-	  const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
-  
-	  // Deshabilitar el botón "next" si llegamos al final
-	  if (scrollAmount >= maxScroll) {
-		nextButton?.setAttribute('disabled', 'true');
-	  } else {
-		nextButton?.removeAttribute('disabled');
-	  }
-  
-	  // Deshabilitar el botón "prev" si estamos al inicio
-	  if (scrollAmount <= 0) {
-		prevButton?.setAttribute('disabled', 'true');
-	  } else {
-		prevButton?.removeAttribute('disabled');
-	  }
-	}
-  
-	// Llamamos a la función para actualizar los botones al cargar la página
-	updateButtons();
-  
-	nextButton?.addEventListener('click', () => {
-	  const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+	// Selecciona todos los contenedores de carrusel
+	  document.querySelectorAll('.carousel-container').forEach(container => {
+	  const carousel = container.querySelector('.carousel');
+	  const nextButton = container.querySelector('.next');
+	  const prevButton = container.querySelector('.prev');
 	  
-	  // Solo desplazar si no estamos en el límite derecho
-	  if (scrollAmount < maxScroll) {
-		scrollAmount += cardWidth;
-		carousel?.scrollTo({
-		  left: scrollAmount,
-		  behavior: 'smooth'
-		});
-		updateButtons(); // Actualizar los botones después de desplazarse
-	  }
-	});
-  
-	prevButton?.addEventListener('click', () => {
-	  // Solo desplazar si no estamos en el límite izquierdo
-	  if (scrollAmount > 0) {
-		scrollAmount -= cardWidth;
-		carousel?.scrollTo({
-		  left: scrollAmount,
-		  behavior: 'smooth'
-		});
-		updateButtons(); // Actualizar los botones después de desplazarse
-	  }
-	});
-  
-	// Manejo de movimiento táctil
-	carousel?.addEventListener('touchstart', (e) => {
-	  // Guardar la posición inicial del toque
-	  startX = e.touches[0].clientX;
-	  isDragging = true;
-	});
-  
-	carousel?.addEventListener('touchmove', (e) => {
-	  if (!isDragging) return;
-  
-	  const moveX = e.touches[0].clientX;
-	  const diff = startX - moveX;
-  
-	  // Si el desplazamiento supera el umbral, mover una carta
-	  if (Math.abs(diff) >= swipeThreshold) {
-		// Desplazar hacia la derecha
-		if (diff > 0) {
-		  scrollAmount += cardWidth; 
-		} 
-		// Desplazar hacia la izquierda
-		else {
-		  scrollAmount -= cardWidth; 
+	  let scrollAmount = 0;
+	  const cardWidth = 320; // Ajusta según el ancho de las tarjetas o secciones
+	  const swipeThreshold = cardWidth * 0.25; // Umbral de deslizamiento (25% del ancho de la carta)
+	  
+	  let startX = 0;
+	  let isDragging = false;
+	  
+	  // Función para actualizar el estado de los botones (deshabilitar si es necesario)
+	  function updateButtons() {
+		const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+		
+		// Deshabilitar el botón "next" si llegamos al final
+		if (scrollAmount >= maxScroll) {
+		  nextButton?.setAttribute('disabled', 'true');
+		} else {
+		  nextButton?.removeAttribute('disabled');
 		}
 		
-		carousel?.scrollTo({
-		  left: scrollAmount,
-		  behavior: 'smooth'
-		});
-		startX = moveX; // Actualizar la posición de inicio
-		updateButtons(); // Actualizar los botones después de desplazarse
+		// Deshabilitar el botón "prev" si estamos al inicio
+		if (scrollAmount <= 0) {
+		  prevButton?.setAttribute('disabled', 'true');
+		} else {
+		  prevButton?.removeAttribute('disabled');
+		}
 	  }
-	});
-  
+	  
+	  // Llamamos a la función para actualizar los botones al cargar la página
+	  updateButtons();
+	  
+	  // Evento para el botón de siguiente
+	  nextButton?.addEventListener('click', () => {
+		const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+		
+		if (scrollAmount < maxScroll) {
+		  scrollAmount += cardWidth;
+		  carousel?.scrollTo({
+			left: scrollAmount,
+			behavior: 'smooth'
+		  });
+		  updateButtons(); // Actualizar los botones después de desplazarse
+		}
+	  });
+	  
+	  // Evento para el botón de anterior
+	  prevButton?.addEventListener('click', () => {
+		if (scrollAmount > 0) {
+		  scrollAmount -= cardWidth;
+		  carousel?.scrollTo({
+			left: scrollAmount,
+			behavior: 'smooth'
+		  });
+		  updateButtons(); // Actualizar los botones después de desplazarse
+		}
+	  });
+	  
+	  // Manejo de movimiento táctil
+	  carousel?.addEventListener('touchstart', (e: any) => {
+  		startX = e.touches[0].clientX;
+  		isDragging = true;
+});
+
+	carousel?.addEventListener('touchmove', (e: any) => {
+  	if (!isDragging) return;
+
+  const moveX = e.touches[0].clientX;
+  const diff = startX - moveX;
+
+  if (Math.abs(diff) >= swipeThreshold) {
+    if (diff > 0) {
+      scrollAmount += cardWidth;
+    } else {
+      scrollAmount -= cardWidth;
+    }
+
+    carousel?.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+    startX = moveX;
+    updateButtons();
+  }
+});	  
 	carousel?.addEventListener('touchend', () => {
-	  isDragging = false;
+		isDragging = false;
+	  });
 	});
   </script>
   
