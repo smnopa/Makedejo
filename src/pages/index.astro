@@ -53,114 +53,125 @@ import Coments from '../components/Coments.astro';
 	</section>
 	
 	 <!--Carrousel de Cartas-->
-
-<section class="flex flex-col xl:flex-row justify-center items-center mb-9 carousel-container" data-card-width="320">
-	<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E] text-center lg:text-center mb-6 lg:mb-0 lg:mr-8">
-	  ¿A dónde<br>quieres viajar?
-	</h1>
-	<div class="relative w-full max-w-4xl mx-8">
-	  
-	  <!-- Botón para ir a la izquierda -->
-	  <button class="prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
-		&#10094;
-	  </button>
-	  
+	<section class="flex flex-col xl:flex-row justify-center items-center mb-9 carousel-container" data-card-width="320">
+		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E] text-center lg:text-center mb-6 lg:mb-0 lg:mr-8">
+			¿A dónde<br>quieres viajar?
+		</h1>
+	<div class="relative w-full max-w-4xl mx-8">	  
+		<!-- Botón para ir a la izquierda -->
+		<button class="prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
+			&#10094;
+		</button>	  
 	  <!-- Contenedor de las cartas -->
 	  <div class="carousel flex overflow-hidden scroll-smooth space-x-4 w-full">
-		<!-- Aquí van las cartas ItemCartIndex -->
-		<div class="flex-shrink-0 w-80">
-		  <ItemCartIndex />
-		</div>
-		<div class="flex-shrink-0 w-80">
-		  <ItemCartIndex />
-		</div>
-		<div class="flex-shrink-0 w-80">
-		  <ItemCartIndex />
-		</div>
-		<div class="flex-shrink-0 w-80">
-		  <ItemCartIndex />
-		</div>
-	  </div>
-  
+			<!-- Aquí van las cartas ItemCartIndex -->
+			<div class="flex-shrink-0 w-80">
+				<ItemCartIndex />
+			</div>
+			<div class="flex-shrink-0 w-80">
+				<ItemCartIndex />
+			</div>
+			<div class="flex-shrink-0 w-80">
+				<ItemCartIndex />
+			</div>
+			<div class="flex-shrink-0 w-80">
+				<ItemCartIndex />
+			</div>
+	  </div>  
 	  <!-- Botón para ir a la derecha -->
-	  <button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
-		&#10095;
-	  </button>
+		<button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
+			&#10095;
+		</button>
 	</div>
   </section>
 
   <!-- Seccion de descuentos -->
-  <section class="relative w-full max-w-screen-2xl mx-auto py-10 bg-[#0A3A4E] carousel-container" data-card-width="640">
-	<h2 class="text-white text-4xl font-bold text-center mb-8">
-	  ¡Descuentos Especiales!
-	</h2>
-  
+  <section class="relative mx-auto py-10 bg-[#0A3A4E] carousel-container">
+	<div class="relative flex overflow-hidden w-full carousel">
+	  <!-- izquierda seccion 1 -->
+	  <div class="flex-shrink-0 w-full">
+		<div class="flex flex-col justify-center rounded-lg shadow-lg p-2">
+				<h2 class="text-white text-4xl font-bold text-center mb-2">
+				¡Descuentos Especiales!
+				</h2>
+			<div class="flex flex-row">
+				<img src="img/images/imgBeach.webp" alt="Descuento 2" class="w-full h-96 object-cover rounded-lg mr-6">
+				<img src="img/images/imgDescuentos.webp" alt="Descuento 2" class="w-full h-96 object-cover rounded-lg">
+			</div>
+		  </div>
+	  </div> 
+	  <!-- derecha seccion 2 -->
+	  <div class="flex-shrink-0 w-full">
+		<div class="flex flex-col justify-center bg-white rounded-lg shadow-lg p-6">
+				<h2 class="text-[#0A3A4E] text-4xl font-bold text-center mb-8">
+					¡Descuentos Especiales!
+				</h2>
+		  <div class="flex flex-row">
+				<img src="img/images/imgBeach.webp" alt="Descuento 2" class="w-full h-96 object-cover rounded-lg mr-6">
+				<img src="img/images/imgDescuentos.webp" alt="Descuento 2" class="w-full h-96 object-cover rounded-lg">
+		  </div>
+		</div>
+	  </div>
+	</div>  
 	<!-- Botón para ir a la izquierda -->
+		<button class="prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
+		&#10094;
+		</button>  
+		<!-- Botón para ir a la derecha -->
+		<button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
+		&#10095;
+		</button>
+  	</section>
+  
+  <!-- Seccion de Comentarios -->
+  <section class="py-16 px-8 2xl:px-12">
+	<div class="mb-20 text-center">
+		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E]">
+			Viajamos con Make!!
+		</h1>
+	</div>	
+	<!-- Contenedor del Carrusel de Comentarios -->
+	<div class="relative max-w-full xl:w-10/12 mx-auto carousel-container" data-card-width="320">
+		<!-- Contenedor de los items del carrusel -->
+		<div class="max-w-fit xl mx-auto text-lg text-gray-500 leading-relaxed 2xl:px-44 flex flex-col gap-5 sm:flex-row carousel">
+			<Coments /><Coments /><Coments />
+	</div>	  
+	  <!-- Flechas de Navegación -->
 	<button class="prev absolute top-1/2 left-0 transform -translate-y-1/2  bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
-	  &#10094;
+		&#10094;
 	</button>
-  
-	<!-- Contenedor del carrusel de descuentos -->
-	<div class="flex overflow-hidden scroll-smooth space-x-4 w-full carousel">
-	  <!-- Sección de descuento 1 -->
-	  <div class="w-full flex-shrink-0 bg-white rounded-lg shadow-lg">
-		<img src="img/images/imgBeach.webp" alt="Descuento 1" class="w-full h-64 object-cover rounded-t-lg">
-		<img src="img/images/imgDescuentos.webp" alt="Descuento 1" class="w-full h-64 object-cover rounded-t-lg">
-	  </div>
-  
-	  <!-- Sección de descuento 2 -->
-	  <div class="w-full flex-row bg-white rounded-lg shadow-lg">
-		<img src="img/images/imgDescuentos.webp" alt="Descuento 2" class="w-full h-64 object-cover rounded-t-lg">
-		<div class="p-4 text-center">
-		  <h3 class="text-xl font-bold text-[#0A3A4E]">¡Descuento del 30%!</h3>
-		  <p class="text-lg">En hoteles y resorts</p>
-		</div>
-	  </div>
-  
-	  <!-- Sección de descuento 3 -->
-	  <div class="w-full flex-row bg-white rounded-lg shadow-lg">
-		<img src="img/images/imgfooter.webp" alt="Descuento 3" class="w-full h-64 object-cover rounded-t-lg">
-		<div class="p-4 text-center">
-		  <h3 class="text-xl font-bold text-[#0A3A4E]">¡Descuento del 50%!</h3>
-		  <p class="text-lg">En tours por la ciudad</p>
-		</div>
-	  </div>
-	</div>
-  
-	<!-- Botón para ir a la derecha -->
 	<button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
 	  &#10095;
 	</button>
+   </div>
   </section>
 
-  <section class="py-16 px-8 2xl:px-12">
-	<div class="mb-20 text-center">
-	  <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E]">
-		Viajamos con Make!!
-	  </h1>
-	</div>
-	
-	<!-- Contenedor del Carrusel de Comentarios -->
-	<div class="relative max-w-full xl:w-10/12 mx-auto carousel-container" data-card-width="320">
-	  <!-- Contenedor de los items del carrusel -->
-	  <div class="max-w-fit xl mx-auto text-lg text-gray-500 leading-relaxed 2xl:px-44 flex flex-col gap-5 sm:flex-row carousel">
-		<Coments /><Coments /><Coments />
-	</div>
+  <!-- Seccion de Contacto y mapa -->
+  <div class="bg-[#0A3A4E] mx-auto px-4 py-8">
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+	  <!-- Mapa -->
+	  <div class="relative">
+		<iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.306374040962!2d-77.0781368!3d3.8902402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3723e87a9779b3%3A0xcbf8943b076ec6d!2sEdificio%20Las%20Mercedes!5e0!3m2!1ses-419!2sco!4v1701187004305!5m2!1ses-419!2sco"
+            class="w-full h-[600px] rounded-2xl border-2 border-slate-300" allowfullscreen loading="lazy">
+        </iframe>
+	  </div>
 	  
-	  <!-- Flechas de Navegación -->
-	  <button class="prev absolute top-1/2 left-0 transform -translate-y-1/2  bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
-		&#10094;
-	  </button>
-	  <button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-3 rounded-lg shadow-lg text-gray-800 text-xl">
-	  &#10095;
-	</button>
+	  <!-- Detalles -->
+	  <div class="bg-white text-[#0A3A4E] p-6 rounded-lg">
+		<h2 class="text-3xl font-semibold mb-4">Visítanos</h2>
+		<p class="text-lg mb-2">Edificio Las Mercedes</p>
+		<p class="text-lg mb-4">Cl. 7a #3a-75, Buenaventura, Valle del Cauca</p>
+		<p class="text-lg mb-4"><strong>Teléfono:</strong> +1 844-462-7342</p>
+		<h3 class="text-xl font-semibold mb-2">Horario:</h3>
+		<p class="text-lg mb-4">MON - THURS: 9 AM - 6 PM</p>
+		<p class="text-lg mb-4">FRI - SUN: 9 AM - 6 PM</p>
+		<a href="#" class="text-blue-400 hover:text-blue-500">Ver todos los planes</a>
+	  </div>
 	</div>
-  </section>
-  
- 
+  </div>	
 
-	
-	<Footer />
+<Footer />
 </Layout>
 <script>
 	// Selecciona todos los contenedores de carrusel
@@ -256,7 +267,7 @@ import Coments from '../components/Coments.astro';
 		isDragging = false;
 	  });
 	});
-  </script>
+</script>
 
 
   
