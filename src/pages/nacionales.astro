@@ -5,8 +5,49 @@ import { nacionales } from '../data/nacionales';
 ---
 
 <Layout isHomePage={false} title="Nacionales | Makedejo">
-    <h1>nacionales</h1>
+        <section class="relative z-0 h-[72vh]">
+	  <div class="relative w-full h-full">
+		<!-- Video para pantallas móviles (vertical) -->
+		<video muted autoplay loop playsinline class="object-cover w-full h-full md:hidden">
+		  <source src="/img/videos/videoHomePageMovile.mp4" type="video/mp4">
+		  Tu navegador no soporta el video.
+		</video>
+  
+		<!-- Video para pantallas grandes (horizontal) -->
+		<video muted autoplay loop playsinline class="hidden md:block object-cover w-full h-full">
+		  <source src="/img/videos/videoHomePage.mp4" type="video/mp4">
+		</video>
+  
+		<!-- Texto superpuesto -->
+		<div class="absolute inset-0 flex justify-start">
+		  <!-- Tener en cuenta estos márgenes para el resto de la página -->
+		  <h1 class="font-bold text-white text-3xl mt-11 ml-8 sm:text-4xl lg:text-4xl xl:text-5xl xl:ml-52 xl:mt-20">
+			<span class="block xl:hidden">
+			  “No es lo mismo imaginar una experiencia que vivirla”
+			</span>
+			<span class="hidden xl:block">
+			  “No es lo mismo imaginar una<br>experiencia que vivirla”
+			</span>
+		  </h1>
+		</div>
+	  </div>
+	</section>
 
+  <section class="py-16 px-8 text-center">
+		<div class="mb-8">
+			<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A3A4E]">
+				Todos nuestros viajes nacionales
+			</h1>
+		</div>
+		<div class="max-w-fit xl mx-auto text-lg text-gray-500 leading-relaxed 2xl:px-40">
+			<p>
+				Con Makedejo, descubre la belleza y diversidad de Colombia como nunca antes. Viaja por los destinos más impresionantes del país, disfruta de experiencias únicas y vive aventuras inolvidables, todo sin salir de tu tierra. ¡Es el momento perfecto para explorar lo que Colombia tiene para ofrecer!"
+			</p>
+		</div>
+	</section>
+
+  <div class="max-w-6xl mx-auto my-12 px-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
     {nacionales.map((nacional) => (
     <ItemCard
       id={nacional.id}
@@ -16,4 +57,6 @@ import { nacionales } from '../data/nacionales';
       categoria="nacionales"
     />
 ))}
+ </div>
+  </div>
 </Layout>
