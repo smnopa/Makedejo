@@ -1,0 +1,25 @@
+---
+// Importa el layout y el dataset
+import Layout from '../../layouts/Layout.astro';
+import { internacionales } from '../../data/internacionales';
+
+// Obtener el parámetro dinámico `id` de la URL
+const { id } = Astro.params;
+
+// Buscar la excursión correspondiente por su id
+const internacionalInfo = internacionales.find((internacional) => internacional.id === id);
+
+// Mostrar error si no se encuentra la excursión
+if (!internacionalInfo) {
+  throw new Error(`Excursión con id '${id}' no encontrada.`);
+}
+---
+
+<Layout title={`Excursión ${internacionalInfo.nombre}`} isHomePage={false}>
+  <!-- Contenido de la página -->
+  <div class="text-center">
+    <h1 class="text-3xl font-bold mb-7">{internacionalInfo.nombre}</h1>
+    <p class="text-lg text-gray-600">{internacionalInfo.detalles}</p>
+    <!-- Aquí puedes agregar más contenido -->
+  </div>
+</Layout>

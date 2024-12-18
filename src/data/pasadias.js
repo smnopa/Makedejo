@@ -1,7 +1,7 @@
 export const pasadias = [
   {
-    id: "",
-    nombre: "",
+    id: "pasadias1",
+    nombre: "pasadias1",
     detalles: "",
     img: "",
     incluye: ["", "", ""],
@@ -9,8 +9,8 @@ export const pasadias = [
     flyer: "",
   },
   {
-    id: "",
-    nombre: "",
+    id: "pasadias2",
+    nombre: "pasadias2",
     detalles: "",
     img: "",
     incluye: ["", "", ""],
@@ -18,8 +18,8 @@ export const pasadias = [
     flyer: "",
   },
   {
-    id: "",
-    nombre: "",
+    id: "pasadias3",
+    nombre: "pasadias3",
     detalles: "",
     img: "",
     incluye: ["", "", ""],

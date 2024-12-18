@@ -47,14 +47,14 @@ import { nacionales } from '../data/nacionales';
 	</section>
 
   <div class="max-w-6xl mx-auto my-12 px-4">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     {nacionales.map((nacional) => (
     <ItemCard
       id={nacional.id}
       nombre={nacional.nombre}
       detalles={nacional.detalles}
       img={nacional.img}
-      categoria="nacionales"
+      tipo="nacionales"
     />
 ))}
  </div>
