@@ -1,7 +1,7 @@
 export const nacionales = [
   {
-    id: "",
-    nombre: "",
+    id: "nacional1",
+    nombre: "nacional1",
     detalles: "",
     img: "",
     incluye: ["", "", ""],
@@ -9,8 +9,8 @@ export const nacionales = [
     flyer: "",
   },
   {
-    id: "",
-    nombre: "",
+    id: "nacional2",
+    nombre: "nacional2",
     detalles: "",
     img: "",
     incluye: ["", "", ""],
@@ -18,8 +18,8 @@ export const nacionales = [
     flyer: "",
   },
   {
-    id: "",
-    nombre: "",
+    id: "nacional3",
+    nombre: "nacional3",
     detalles: "",
     img: "",
     incluye: ["", "", ""],

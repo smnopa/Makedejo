@@ -4,10 +4,10 @@ export interface Props {
   nombre: string;
   detalles: string;
   img: string;
-  categoria: string;
+  tipo: 'excursiones' | 'pasadias' | 'nacionales' | 'internacionales';
 }
 
-const { id, nombre, detalles, img, categoria } = Astro.props;
+const { id, nombre, detalles, img, tipo } = Astro.props;
 ---
 
 <article class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-80 m-4 max-h-full">
@@ -27,8 +27,8 @@ const { id, nombre, detalles, img, categoria } = Astro.props;
 
       <!-- Botón -->
       <div class="flex justify-center mt-4">
-        <a href={`/${categoria}/${id}`} target="_blank" rel="noopener noreferrer">
-          <button class="bg-[#0A3A4E] text-white px-4 py-1 text-base rounded-full w-32 hover:bg-sky-950">
+        <a href={`/${tipo}/${id}`}>
+          <button class="bg-blue-500 text-white px-2 py-1 text-sm rounded-full w-32 hover:bg-blue-600">
             Más detalles
           </button>
         </a>
