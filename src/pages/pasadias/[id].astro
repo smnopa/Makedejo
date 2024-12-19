@@ -1,25 +1,62 @@
 ---
-// Importa el layout y el dataset
 import Layout from '../../layouts/Layout.astro';
 import { pasadias } from '../../data/pasadias';
 
-// Obtener el parámetro dinámico `id` de la URL
 const { id } = Astro.params;
-
-// Buscar la excursión correspondiente por su id
 const pasadiaInfo = pasadias.find((pasadia) => pasadia.id === id);
 
-// Mostrar error si no se encuentra la excursión
 if (!pasadiaInfo) {
   throw new Error(`Excursión con id '${id}' no encontrada.`);
 }
 ---
 
 <Layout title={`Excursión ${pasadiaInfo.nombre}`} isHomePage={false}>
-  <!-- Contenido de la página -->
-  <div class="text-center">
-    <h1 class="text-3xl font-bold mb-7">{pasadiaInfo.nombre}</h1>
-    <p class="text-lg text-gray-600">{pasadiaInfo.detalles}</p>
-    <!-- Aquí puedes agregar más contenido -->
+  <div class="bg-white">
+  <!-- Header -->
+  <div class="relative">
+    <img
+      src={`/images/${pasadiaInfo.img}`}
+      alt={`Imagen de ${pasadiaInfo.nombre}`}
+      class="w-full h-96 object-cover"
+    />
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-white bg-black bg-opacity-40">
+      <h1 class="text-4xl font-bold">{pasadiaInfo.nombre}</h1>
+      <button class="mt-4 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded">
+        ¿Qué incluye?
+      </button>
+    </div>
+  </div>
+
+  <!-- Detalles -->
+  <div class="px-6 py-12 md:px-20 lg:px-32">
+    <h2 class="text-3xl font-bold mb-6 text-blue-900">Detalles</h2>
+    <p class="text-lg text-gray-700 leading-relaxed mb-10">
+      {pasadiaInfo.detalles}
+    </p>
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">Incluye:</h2>
+    <ul class="list-disc list-inside mb-6">
+      {pasadiaInfo.incluye.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">No Incluye:</h2>
+    <ul class="list-disc list-inside mb-6">
+      {pasadiaInfo.noIncluye.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">Precios:</h2>
+    <ul class="list-disc list-inside mb-6">
+      <li>Adulto: {pasadiaInfo.precios.adulto}</li>
+      <li>Niño: {pasadiaInfo.precios.niño}</li>
+      <li>Descuento: {pasadiaInfo.precios.descuento}</li>
+    </ul>
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">Coordinador:</h2>
+    <p class="text-lg text-gray-700 leading-relaxed mb-10">
+      Nombre: {pasadiaInfo.coordinador.nombre}<br>
+      Teléfono: {pasadiaInfo.coordinador.telefono}<br>
+      Email: {pasadiaInfo.coordinador.email}
+    </p>
+    <a href={`/flyers/${pasadiaInfo.flyer}`} class="text-blue-500 underline mt-4 block">Descargar Flyer</a>
   </div>
 </Layout>

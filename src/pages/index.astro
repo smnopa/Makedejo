@@ -6,33 +6,34 @@ import Coments from '../components/Coments.astro';
 ---
 
 <Layout isHomePage={false} title="Makedejo">
-	<section class="relative z-0 h-[72vh]">
-	  <div class="relative w-full h-full">
-		<!-- Video para pantallas móviles (vertical) -->
-		<video muted autoplay loop playsinline class="object-cover w-full h-full md:hidden">
-		  <source src="/img/videos/videoHomePageMovile.mp4" type="video/mp4">
-		  Tu navegador no soporta el video.
-		</video>
-  
-		<!-- Video para pantallas grandes (horizontal) -->
-		<video muted autoplay loop playsinline class="hidden md:block object-cover w-full h-full">
-		  <source src="/img/videos/videoHomePage.mp4" type="video/mp4">
-		</video>
-  
-		<!-- Texto superpuesto -->
-		<div class="absolute inset-0 flex justify-start">
-		  <!-- Tener en cuenta estos márgenes para el resto de la página -->
-		  <h1 class="font-bold text-white text-3xl mt-11 ml-8 sm:text-4xl lg:text-4xl xl:text-5xl xl:ml-52 xl:mt-20">
-			<span class="block xl:hidden">
-			  “No es lo mismo imaginar una experiencia que vivirla”
-			</span>
-			<span class="hidden xl:block">
-			  “No es lo mismo imaginar una<br>experiencia que vivirla”
-			</span>
-		  </h1>
-		</div>
-	  </div>
-	</section>
+	<section class="relative z-0 h-screen">
+  <div class="relative w-full h-full">
+    <!-- Video para pantallas móviles (vertical) -->
+    <video muted autoplay loop playsinline class="object-cover w-full h-full md:hidden">
+      <source src="/img/videos/videoHomePageMovile.mp4" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+
+    <!-- Video para pantallas grandes (horizontal) -->
+    <video muted autoplay loop playsinline class="hidden md:block object-cover w-full h-full">
+      <source src="/img/videos/videoHomePage.mp4" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+
+    <!-- Texto superpuesto -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <h1 class="font-bold text-white text-center text-3xl sm:text-4xl lg:text-5xl px-4 xl:px-20">
+        <span class="block xl:hidden">
+          “No es lo mismo imaginar una experiencia que vivirla”
+        </span>
+        <span class="hidden xl:block">
+          “No es lo mismo imaginar una<br>experiencia que vivirla”
+        </span>
+      </h1>
+    </div>
+  </div>
+</section>
+
 
 	<!--TitleDescription-->
 	<section class="py-16 px-8 text-center">
