@@ -6,25 +6,25 @@ import Coments from '../components/Coments.astro';
 ---
 
 <Layout isHomePage={false} title="Excursiones | Makedejo">
-    <section class="relative z-0 h-[72vh]">
-      <div class="relative w-full h-full">
-        <!-- Imagen para todas las pantallas -->
-        <img src="/img/images/Banner_Excursiones.png" alt="Banner Excursiones" class="object-cover w-full h-full" />
-  
-        <!-- Texto superpuesto -->
-        <div class="absolute inset-0 flex justify-start">
-          <!-- Tener en cuenta estos márgenes para el resto de la página -->
-          <h1 class="font-bold text-white text-3xl mt-11 ml-8 sm:text-4xl lg:text-4xl xl:text-5xl xl:ml-52 xl:mt-20">
-            <span class="block xl:hidden">
-              "Con Makedejo, cada paso es una nueva aventura."
-            </span>
-            <span class="hidden xl:block">
-              “Con Makedejo, cada paso es una<br>nueva aventura.”
-            </span>
-          </h1>
-        </div>
-      </div>
-    </section>
+    <section class="relative z-0 h-[72vh] mt-[var(--nav-height)]">
+  <div class="relative w-full h-full">
+    <!-- Imagen para todas las pantallas -->
+    <img src="/img/images/Banner_Excursiones.png" alt="Banner Excursiones" class="object-cover w-full h-full" />
+
+    <!-- Texto superpuesto -->
+    <div class="absolute inset-0 flex justify-start">
+      <!-- Tener en cuenta estos márgenes para el resto de la página -->
+      <h1 class="font-bold text-white text-3xl mt-11 ml-8 sm:text-4xl lg:text-4xl xl:text-5xl xl:ml-52 xl:mt-20">
+        <span class="block xl:hidden">
+          "Con Makedejo, cada paso es una nueva aventura."
+        </span>
+        <span class="hidden xl:block">
+          “Con Makedejo, cada paso es una<br>nueva aventura.”
+        </span>
+      </h1>
+    </div>
+  </div>
+</section>
 
   <section class="py-16 px-8 text-center">
 		<div class="mb-8">
