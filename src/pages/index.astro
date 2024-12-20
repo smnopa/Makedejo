@@ -183,11 +183,11 @@ import Coments from '../components/Coments.astro';
 
 
 <script>
-	// Selecciona todos los contenedores de carrusel
-	document.querySelectorAll('.carousel-container').forEach(container => {
-	  const carousel = container.querySelector('.carousel');
-	  const nextButton = container.querySelector('.next');
-	  const prevButton = container.querySelector('.prev');
+	// Tipado adecuado para elementos del DOM
+	document.querySelectorAll<HTMLElement>('.carousel-container').forEach(container => {
+	  const carousel = container.querySelector<HTMLElement>('.carousel');
+	  const nextButton = container.querySelector<HTMLButtonElement>('.next');
+	  const prevButton = container.querySelector<HTMLButtonElement>('.prev');
 	  
 	  // Obtener el ancho de desplazamiento desde un atributo 'data'
 	  const cardWidth = parseInt(container.getAttribute('data-card-width') || '320'); 
@@ -199,20 +199,22 @@ import Coments from '../components/Coments.astro';
   
 	  // Función para actualizar el estado de los botones
 	  function updateButtons() {
-		const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+		if (!carousel) return; // Verificación adicional
+  
+		const maxScroll = carousel.scrollWidth - carousel.clientWidth;
 		
 		// Deshabilitar el botón "next" si llegamos al final
-		if (scrollAmount >= maxScroll) {
-		  nextButton?.setAttribute('disabled', 'true');
-		} else {
-		  nextButton?.removeAttribute('disabled');
+		if (scrollAmount >= maxScroll && nextButton) {
+		  nextButton.setAttribute('disabled', 'true');
+		} else if (nextButton) {
+		  nextButton.removeAttribute('disabled');
 		}
 		
 		// Deshabilitar el botón "prev" si estamos al inicio
-		if (scrollAmount <= 0) {
-		  prevButton?.setAttribute('disabled', 'true');
-		} else {
-		  prevButton?.removeAttribute('disabled');
+		if (scrollAmount <= 0 && prevButton) {
+		  prevButton.setAttribute('disabled', 'true');
+		} else if (prevButton) {
+		  prevButton.removeAttribute('disabled');
 		}
 	  }
 	  
@@ -221,11 +223,13 @@ import Coments from '../components/Coments.astro';
 	  
 	  // Evento para el botón de siguiente
 	  nextButton?.addEventListener('click', () => {
-		const maxScroll = carousel!.scrollWidth - carousel!.clientWidth;
+		if (!carousel) return; // Verificación adicional
+  
+		const maxScroll = carousel.scrollWidth - carousel.clientWidth;
 		
 		if (scrollAmount < maxScroll) {
 		  scrollAmount += cardWidth;
-		  carousel?.scrollTo({
+		  carousel.scrollTo({
 			left: scrollAmount,
 			behavior: 'smooth'
 		  });
@@ -235,45 +239,56 @@ import Coments from '../components/Coments.astro';
 	  
 	  // Evento para el botón de anterior
 	  prevButton?.addEventListener('click', () => {
+		if (!carousel) return; // Verificación adicional
+  
 		if (scrollAmount > 0) {
 		  scrollAmount -= cardWidth;
-		  carousel?.scrollTo({
+		  carousel.scrollTo({
 			left: scrollAmount,
 			behavior: 'smooth'
 		  });
 		  updateButtons(); // Actualizar los botones después de desplazarse
 		}
 	  });
-	  
-  	  // Manejo de movimiento táctil
-	carousel?.addEventListener('touchstart', (e: any) => {
+  
+	  // Manejo de movimiento táctil
+	  carousel?.addEventListener('touchstart', (e: TouchEvent) => {
 		startX = e.touches[0].clientX;
 		isDragging = true;
-  });
+	  });
   
-	carousel?.addEventListener('touchmove', (e: any) => {
+	  carousel?.addEventListener('touchmove', (e: TouchEvent) => {
 		if (!isDragging) return;
   
-	const moveX = e.touches[0].clientX;
-	const diff = startX - moveX;
+		const moveX = e.touches[0].clientX;
+		const diff = startX - moveX;
   
-	if (Math.abs(diff) >= swipeThreshold) {
-	  if (diff > 0) {
-		scrollAmount += cardWidth;
-	  } else {
-		scrollAmount -= cardWidth;
-	  }
+		if (Math.abs(diff) >= swipeThreshold) {
+		  if (diff > 0) {
+			scrollAmount += cardWidth;
+		  } else {
+			scrollAmount -= cardWidth;
+		  }
   
-	  carousel?.scrollTo({
-		left: scrollAmount,
-		behavior: 'smooth'
+		  carousel.scrollTo({
+			left: scrollAmount,
+			behavior: 'smooth'
+		  });
+		  startX = moveX;
+		  updateButtons();
+		}
 	  });
-	  startX = moveX;
-	  updateButtons();
-	}
-  });
+  
 	  carousel?.addEventListener('touchend', () => {
 		isDragging = false;
 	  });
 	});
 </script>
+
+
+  
+  
+
+
+
+  
